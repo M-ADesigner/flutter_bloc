@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_tutorial/bloc/user/user_bloc.dart';
+import 'package:get/get.dart';
+
 import 'package:flutter_bloc_tutorial/pages/pagina1_page.dart';
 import 'package:flutter_bloc_tutorial/pages/pagina2_page.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => UserBloc(),
-        ),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Material App',
+      initialRoute: '/pagina1',
+      getPages: [
+        GetPage(name: '/pagina1', page: () => Pagina1Page()),
+        GetPage(name: '/pagina2', page: () => const Pagina2Page()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Material App',
-        initialRoute: 'pagina1',
-        routes: {
-          'pagina1': (_) => const Pagina1Page(),
-          'pagina2': (_) => const Pagina2Page(),
-        },
-      ),
     );
   }
 }
